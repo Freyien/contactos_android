@@ -11,9 +11,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Diseños App',
-      routes: {
-        '/' : (context) => IndexPage(),
-      },
+      home: IndexPage(),
     );
   }
 }

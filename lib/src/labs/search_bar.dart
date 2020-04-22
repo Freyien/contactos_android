@@ -40,15 +40,14 @@ class _MenuItem extends StatelessWidget {
           item: MenuButton(
             onPressed: (){ 
               print('Menú'); 
+              Scaffold.of(context).openDrawer();
             }, 
             child: Icon(Icons.menu)
           ),
         ),
-        _MenuButton(
+        _MenuFlatButton(
           item: MenuButton(
-            onPressed: (){ 
-              print('Buscar contactos'); 
-            }, 
+            onPressed: (){  print('Buscar contactos');  }, 
             child: Text(
               'Buscar contactos...',
               style: TextStyle(
@@ -60,19 +59,16 @@ class _MenuItem extends StatelessWidget {
         ),
         _MenuButton(
           item: MenuButton(
-            onPressed: (){ 
-              print('Options'); 
-            }, 
+            onPressed: (){  print('Options');  }, 
             child: Icon(Icons.more_vert)
           ),
         ),
         _MenuButton(
           item: MenuButton(
-            onPressed: (){ 
-              print('Avatar'); 
-            }, 
-            child: CircleAvatar(
-              child: Text('F'),
+            onPressed: () {  print('Avatar');  }, 
+            child: CircleAvatar( 
+              child: Text('F'), 
+              maxRadius: 15,
             )
           ),
         )
@@ -85,6 +81,28 @@ class _MenuButton extends StatelessWidget {
   final MenuButton item;
 
   _MenuButton({ @required this.item });
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.transparent,
+      shape: CircleBorder(),
+      clipBehavior: Clip.hardEdge,
+      child: InkWell(
+        onTap: item.onPressed,
+        child: Container(
+          padding: EdgeInsets.all(7),
+          child: item.child,
+        ),
+      ),
+    );
+  }
+}
+
+class _MenuFlatButton extends StatelessWidget {
+  final MenuButton item;
+
+  _MenuFlatButton({ @required this.item });
 
   @override
   Widget build(BuildContext context) {

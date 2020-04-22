@@ -1,3 +1,4 @@
+import 'package:draggable_scrollbar_sliver/draggable_scrollbar_sliver.dart';
 import 'package:flutter/material.dart';
 import 'package:contacts/src/models/contact_model.dart';
 import 'package:contacts/src/utils/colors_utils.dart';
@@ -9,11 +10,37 @@ class ContactList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var contactGroups = contactList.groupByFirstLetter();
+    ScrollController controller = ScrollController();
 
-    return CustomScrollView(
-      slivers: List.generate(contactGroups.length, (i) {
-        return _StickyHeaderContactList( contactGroups[i] );
-      })
+    return DraggableScrollbar(
+      controller: controller,
+      child: CustomScrollView(
+        slivers: List.generate(contactGroups.length, (i) {
+          return _StickyHeaderContactList( contactGroups[i] );
+        }),
+        controller: controller,
+      ),
+      heightScrollThumb: 90.0,
+      backgroundColor: Color(0xff5F6267),
+      scrollThumbBuilder: (
+        Color backgroundColor,
+        Animation<double> thumbAnimation,
+        Animation<double> labelAnimation,
+        double height, 
+        {
+          Text labelText,
+          BoxConstraints labelConstraints,
+        }
+      ) {
+        return FadeTransition(
+          opacity: thumbAnimation,
+          child: Container(
+            height: height,
+            width: 8.0,
+            color: backgroundColor,
+          ),
+        );
+      },
     );
   }
 }
@@ -77,27 +104,21 @@ class _Contact extends StatelessWidget {
     final secondname = this.contact["secondname"];
     final lastname = this.contact["lastname"];
     
-    return Row(
-      children: <Widget>[
-        Expanded(
-          child: ListTile(
-            leading: CircleAvatar(
-              backgroundColor: randomColor(),
-              foregroundColor: Colors.white,
-              child: Text(
-                this.letter,
-                style: TextStyle(
-                  fontSize: 27
-                ),
-              ),
-            ),
-            title: Text( 
-              '$firstname $secondname $lastname',
-              overflow: TextOverflow.ellipsis,
-            ),
+    return ListTile(
+      leading: CircleAvatar(
+        backgroundColor: randomColor(),
+        foregroundColor: Colors.white,
+        child: Text(
+          this.letter,
+          style: TextStyle(
+            fontSize: 27
           ),
         ),
-      ],
+      ),
+      title: Text( 
+        '$firstname $secondname $lastname',
+        overflow: TextOverflow.ellipsis,
+      ),
     );
   }
 }
