@@ -1,3 +1,4 @@
+import 'package:contacts/src/widgets/custom_divider.dart';
 import 'package:flutter/material.dart';
 
 class SearchBar extends StatelessWidget {
@@ -65,7 +66,11 @@ class _MenuItem extends StatelessWidget {
         ),
         _MenuButton(
           item: MenuButton(
-            onPressed: () {  print('Avatar');  }, 
+            onPressed: () {  
+              print('Avatar');  
+              _showDialog(context);
+            }
+            , 
             child: CircleAvatar( 
               child: Text('F'), 
               maxRadius: 15,
@@ -127,4 +132,118 @@ class MenuButton {
     @required this.onPressed, 
     @required this.child,
   });
+}
+
+void _showDialog(context) {
+  Dialog simpleDialog = Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+
+          Container(
+            padding: EdgeInsets.only(bottom: 10),
+            child: Column(
+              children: <Widget>[
+
+                ListTile(
+                  leading: CircleAvatar(
+                    child: Text('F'),
+                  ),
+                  title: Text('Fernando Luis Martínez', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                  subtitle: Text('ferb.stop@gmail.com', style: TextStyle(fontSize: 14)),
+                  trailing: Image.asset('assets/imgs/google-logo.png', height: 30,)
+                ),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    Container(
+                      margin: EdgeInsets.only(right: 30),
+                      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        border: Border.all(
+                          color: Colors.black12
+                        ),
+                      ),
+                      child: Text('Administrar tu cuenta de Google', style: TextStyle(fontWeight: FontWeight.w500),),
+                    ),
+                  ],
+                ),            
+
+              ],
+            ),
+          ),
+
+          CustomDivider(),
+
+          Container(
+            padding: EdgeInsets.only(bottom: 15),
+            child: Column(
+              children: <Widget>[
+
+                ListTile(
+                  leading: CircleAvatar(
+                    backgroundColor: Colors.grey.withOpacity(.15),
+                    child: Icon(Icons.people_outline, color: Colors.black.withOpacity(.8)),
+                  ),
+                  title: Text('Fernando Luis Martínez', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
+                  subtitle: Text('fernandoluis@recursoconfiable.com', style: TextStyle(fontSize: 13)),
+                ),
+                
+                ListTile(
+                  leading: CircleAvatar(
+                    backgroundColor: Colors.grey.withOpacity(.15),
+                    child: Icon(Icons.add_circle_outline, color: Colors.black.withOpacity(.8)),
+                  ),
+                  title: Text('Agregar cuenta', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
+                  subtitle: Text('ferb.stop@gmail.com', style: TextStyle(fontSize: 13)),
+                ),
+
+                ListTile(
+                  leading: CircleAvatar(
+                    backgroundColor: Colors.grey.withOpacity(.15),
+                    child: Icon(Icons.lock_outline, color: Colors.black.withOpacity(.8)),
+                  ),
+                  title: Text('Administrar cuentas en este dispositivo', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
+                ),
+
+
+              ],
+            ),
+          ),
+
+          CustomDivider(),
+
+          Container(
+            padding: EdgeInsets.only(top: 10, bottom: 15),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+
+                Text('Políticas de Privacidad', style: TextStyle(fontSize: 12)),
+                
+                Container(
+                  height: 5,
+                  width: 5,
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    shape: BoxShape.circle
+                  ),
+                ),
+
+                Text('Condiciones del servicio', style: TextStyle(fontSize: 12))
+
+              ],
+            ),
+          )
+
+        ],
+      ),
+    );
+
+    showDialog( context: context, builder: (BuildContext context) => simpleDialog );
 }
