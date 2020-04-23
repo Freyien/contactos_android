@@ -1,3 +1,4 @@
+import 'package:contacts/src/widgets/custom_divider.dart';
 import 'package:flutter/material.dart';
 
 import 'package:contacts/src/pages/unser_construction_page.dart';
@@ -15,6 +16,7 @@ class IndexPage extends StatelessWidget {
         child: Column(
           children: <Widget>[
             _SearchBarLocation(),
+            SizedBox(height: 2),
             _ContactListLocation(),
           ],
         )
@@ -34,16 +36,16 @@ class _Drawer extends StatelessWidget {
             children: <Widget>[
 
               _DraweHeader(),
-              _Divider(),
+              CustomDivider(),
 
               _DrawerPages(),
-              _Divider(),
+              CustomDivider(),
 
               _DrawerLabels(),
-              _Divider(),
+              CustomDivider(),
 
               _DrawerConfig(),
-              _Divider(),
+              CustomDivider(),
 
               //Dark Mode
               _DarkModeOption()
@@ -205,23 +207,11 @@ class _DarkModeOption extends StatelessWidget {
   }
 }
 
-class _Divider extends StatelessWidget {
-
-  @override
-  Widget build(BuildContext context) {
-    return Divider(color: Colors.black38);
-  }
-}
-
 class _ContactListLocation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Container(
-
-        child: ContactList()
-        
-      )
+      child: ContactList()
     );
   }
 }

@@ -2,8 +2,15 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import 'package:contacts/src/pages/index.dart';
+import 'package:contacts/src/pages/unser_construction_page.dart';
+
+import 'package:contacts/src/widgets/custom_menu_button.dart';
 
 class AddContactPage extends StatelessWidget {
+  List<Choice> choices = const <Choice>[
+    const Choice(title: 'Ayuda y comentarios'),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,10 +33,9 @@ class AddContactPage extends StatelessWidget {
               Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => IndexPage())); 
             }, 
           ),
-          IconButton(
-            icon: Icon(Icons.more_vert, color: Colors.black), 
-            onPressed: (){}
-          )
+
+          CustomMenuButton(choices: choices),
+
         ],
       ),
       body: SingleChildScrollView(
@@ -139,7 +145,7 @@ class __RowTextFieldState extends State<_RowTextField> {
                   suffixIcon = null;
                 else
                   suffixIcon = IconButton(icon: Icon(Icons.clear), onPressed: (){   
-                    Timer.periodic(Duration(milliseconds: 50), (timer) {
+                    Timer(Duration(milliseconds: 50), () {
                       controller.clear(); 
                     });
                   });

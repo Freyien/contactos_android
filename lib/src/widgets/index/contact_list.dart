@@ -1,8 +1,12 @@
-import 'package:draggable_scrollbar_sliver/draggable_scrollbar_sliver.dart';
+import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:contacts/src/models/contact_model.dart';
-import 'package:contacts/src/utils/colors_utils.dart';
+
+import 'package:draggable_scrollbar_sliver/draggable_scrollbar_sliver.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
+
+import 'package:contacts/src/utils/colors_utils.dart';
+import 'package:contacts/src/models/contact_model.dart';
+import 'package:contacts/src/pages/contact_info.dart';
 
 class ContactList extends StatelessWidget {
   final ContactModelList contactList = ContactModelList();
@@ -104,20 +108,30 @@ class _Contact extends StatelessWidget {
     final secondname = this.contact["secondname"];
     final lastname = this.contact["lastname"];
     
-    return ListTile(
-      leading: CircleAvatar(
-        backgroundColor: randomColor(),
-        foregroundColor: Colors.white,
-        child: Text(
-          this.letter,
-          style: TextStyle(
-            fontSize: 27
+    return Material(
+      color: Colors.white,
+      child: InkWell(
+        onTap: () {
+          Timer(Duration(milliseconds: 100), (){
+            Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ContactInfo()));
+          });
+        },
+        child: ListTile(
+          leading: CircleAvatar(
+            backgroundColor: randomColor(),
+            foregroundColor: Colors.white,
+            child: Text(
+              this.letter,
+              style: TextStyle(
+                fontSize: 27
+              ),
+            ),
+          ),
+          title: Text( 
+            '$firstname $secondname $lastname',
+            overflow: TextOverflow.ellipsis,
           ),
         ),
-      ),
-      title: Text( 
-        '$firstname $secondname $lastname',
-        overflow: TextOverflow.ellipsis,
       ),
     );
   }
