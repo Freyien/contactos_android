@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:contacts/src/pages/unser_construction_page.dart';
 import 'package:contacts/src/widgets/index/contact_list.dart';
 import 'package:contacts/src/labs/search_bar.dart';
+import 'package:contacts/src/pages/add_contact_page.dart';
 
 class IndexPage extends StatelessWidget {
   @override
@@ -239,7 +240,9 @@ class _FloatingActionAdd extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      onPressed: (){},
+      onPressed: (){
+        Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => AddContactPage()));
+      },
       child: Icon(Icons.add),
       backgroundColor: Colors.blue,
     );

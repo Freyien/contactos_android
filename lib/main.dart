@@ -1,3 +1,4 @@
+import 'package:contacts/src/pages/add_contact_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:contacts/src/pages/index.dart';
