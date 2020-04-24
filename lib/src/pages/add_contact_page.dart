@@ -2,12 +2,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import 'package:contacts/src/pages/index.dart';
-import 'package:contacts/src/pages/unser_construction_page.dart';
 
 import 'package:contacts/src/widgets/custom_menu_button.dart';
 
 class AddContactPage extends StatelessWidget {
-  List<Choice> choices = const <Choice>[
+  final List<Choice> choices = const <Choice>[
     const Choice(title: 'Ayuda y comentarios'),
   ];
 

@@ -1,7 +1,6 @@
 import 'package:contacts/src/widgets/custom_divider.dart';
 import 'package:flutter/material.dart';
 
-import 'package:contacts/src/pages/unser_construction_page.dart';
 import 'package:contacts/src/widgets/index/contact_list.dart';
 import 'package:contacts/src/labs/search_bar.dart';
 import 'package:contacts/src/pages/add_contact_page.dart';

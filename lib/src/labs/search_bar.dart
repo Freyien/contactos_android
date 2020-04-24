@@ -1,5 +1,7 @@
-import 'package:contacts/src/widgets/custom_divider.dart';
 import 'package:flutter/material.dart';
+
+import 'package:contacts/src/widgets/custom_divider.dart';
+import 'package:contacts/src/search/search_delegate.dart';
 
 class SearchBar extends StatelessWidget {
   @override
@@ -48,14 +50,22 @@ class _MenuItem extends StatelessWidget {
         ),
         _MenuFlatButton(
           item: MenuButton(
-            onPressed: (){  print('Buscar contactos');  }, 
             child: Text(
               'Buscar contactos...',
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.grey
               ),
-            )
+            ),
+            onPressed: (){  
+            
+              showSearch(
+                context: context, 
+                delegate: DataSearch(), 
+                //query: 'Hola'
+              );
+              
+            }, 
           ),
         ),
         _MenuButton(

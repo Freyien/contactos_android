@@ -107,6 +107,7 @@ class _Contact extends StatelessWidget {
     final firstname = this.contact["firstname"];
     final secondname = this.contact["secondname"];
     final lastname = this.contact["lastname"];
+    final color = this.contact["color"];
     
     return Material(
       color: Colors.white,
@@ -118,7 +119,7 @@ class _Contact extends StatelessWidget {
         },
         child: ListTile(
           leading: CircleAvatar(
-            backgroundColor: randomColor(),
+            backgroundColor: color,
             foregroundColor: Colors.white,
             child: Text(
               this.letter,
