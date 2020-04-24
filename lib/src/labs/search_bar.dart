@@ -69,6 +69,8 @@ class _MenuItem extends StatelessWidget {
             onPressed: () {  
               print('Avatar');  
               _showDialog(context);
+
+              
             }
             , 
             child: CircleAvatar( 
@@ -139,111 +141,113 @@ void _showDialog(context) {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8.0),
       ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
+      child: Container(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
 
-          Container(
-            padding: EdgeInsets.only(bottom: 10),
-            child: Column(
-              children: <Widget>[
+            Container(
+              padding: EdgeInsets.only(bottom: 10),
+              child: Column(
+                children: <Widget>[
 
-                ListTile(
-                  leading: CircleAvatar(
-                    child: Text('F'),
-                  ),
-                  title: Text('Fernando Luis Martínez', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
-                  subtitle: Text('ferb.stop@gmail.com', style: TextStyle(fontSize: 14)),
-                  trailing: Image.asset('assets/imgs/google-logo.png', height: 30,)
-                ),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    Container(
-                      margin: EdgeInsets.only(right: 30),
-                      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 7),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
-                        border: Border.all(
-                          color: Colors.black12
-                        ),
-                      ),
-                      child: Text('Administrar tu cuenta de Google', style: TextStyle(fontWeight: FontWeight.w500),),
+                  ListTile(
+                    leading: CircleAvatar(
+                      child: Text('F'),
                     ),
-                  ],
-                ),            
+                    title: Text('Fernando Luis Martínez', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+                    subtitle: Text('ferb.stop@gmail.com', style: TextStyle(fontSize: 12)),
+                    trailing: Image.asset('assets/imgs/google-logo.png', height: 30,)
+                  ),
 
-              ],
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      Container(
+                        margin: EdgeInsets.only(right: 30),
+                        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          border: Border.all(
+                            color: Colors.black12
+                          ),
+                        ),
+                        child: Text('Administrar tu cuenta de Google', style: TextStyle(fontWeight: FontWeight.w500),),
+                      ),
+                    ],
+                  ),            
+
+                ],
+              ),
             ),
-          ),
 
-          CustomDivider(),
+            CustomDivider(),
 
-          Container(
-            padding: EdgeInsets.only(bottom: 15),
-            child: Column(
-              children: <Widget>[
+            Container(
+              padding: EdgeInsets.only(bottom: 15),
+              child: Column(
+                children: <Widget>[
 
-                ListTile(
-                  leading: CircleAvatar(
-                    backgroundColor: Colors.grey.withOpacity(.15),
-                    child: Icon(Icons.people_outline, color: Colors.black.withOpacity(.8)),
+                  ListTile(
+                    leading: CircleAvatar(
+                      backgroundColor: Colors.grey.withOpacity(.15),
+                      child: Icon(Icons.people_outline, color: Colors.black.withOpacity(.8)),
+                    ),
+                    title: Text('Fernando Luis Martínez', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500)),
+                    subtitle: Text('micooreo@gmail.com', style: TextStyle(fontSize: 12)),
                   ),
-                  title: Text('Fernando Luis Martínez', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
-                  subtitle: Text('fernandoluis@recursoconfiable.com', style: TextStyle(fontSize: 13)),
-                ),
-                
-                ListTile(
-                  leading: CircleAvatar(
-                    backgroundColor: Colors.grey.withOpacity(.15),
-                    child: Icon(Icons.add_circle_outline, color: Colors.black.withOpacity(.8)),
+                  
+                  ListTile(
+                    leading: CircleAvatar(
+                      backgroundColor: Colors.grey.withOpacity(.15),
+                      child: Icon(Icons.add_circle_outline, color: Colors.black.withOpacity(.8)),
+                    ),
+                    title: Text('Agregar cuenta', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500)),
+                    subtitle: Text('ferb.stop@gmail.com', style: TextStyle(fontSize: 12)),
                   ),
-                  title: Text('Agregar cuenta', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
-                  subtitle: Text('ferb.stop@gmail.com', style: TextStyle(fontSize: 13)),
-                ),
 
-                ListTile(
-                  leading: CircleAvatar(
-                    backgroundColor: Colors.grey.withOpacity(.15),
-                    child: Icon(Icons.lock_outline, color: Colors.black.withOpacity(.8)),
+                  ListTile(
+                    leading: CircleAvatar(
+                      backgroundColor: Colors.grey.withOpacity(.15),
+                      child: Icon(Icons.lock_outline, color: Colors.black.withOpacity(.8)),
+                    ),
+                    title: Text('Administrar cuentas en este dispositivo', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500)),
                   ),
-                  title: Text('Administrar cuentas en este dispositivo', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
-                ),
 
 
-              ],
+                ],
+              ),
             ),
-          ),
 
-          CustomDivider(),
+            CustomDivider(),
 
-          Container(
-            padding: EdgeInsets.only(top: 10, bottom: 15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
+            Container(
+              padding: EdgeInsets.only(top: 10, bottom: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
 
-                Text('Políticas de Privacidad', style: TextStyle(fontSize: 12)),
-                
-                Container(
-                  height: 5,
-                  width: 5,
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    shape: BoxShape.circle
+                  Text('Políticas de Privacidad', style: TextStyle(fontSize: 12)),
+                  
+                  Container(
+                    height: 5,
+                    width: 5,
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      shape: BoxShape.circle
+                    ),
                   ),
-                ),
 
-                Text('Condiciones del servicio', style: TextStyle(fontSize: 12))
+                  Text('Condiciones del servicio', style: TextStyle(fontSize: 12))
 
-              ],
-            ),
-          )
+                ],
+              ),
+            )
 
-        ],
+          ],
+        ),
       ),
     );
 
-    showDialog( context: context, builder: (BuildContext context) => simpleDialog );
+  showDialog( context: context, builder: (BuildContext context) => simpleDialog );
 }
