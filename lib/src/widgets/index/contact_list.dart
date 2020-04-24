@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:draggable_scrollbar_sliver/draggable_scrollbar_sliver.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
 
-import 'package:contacts/src/utils/colors_utils.dart';
 import 'package:contacts/src/models/contact_model.dart';
 import 'package:contacts/src/pages/contact_info.dart';
 

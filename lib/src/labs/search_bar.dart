@@ -204,7 +204,7 @@ void _showDialog(context) {
                       child: Icon(Icons.people_outline, color: Colors.black.withOpacity(.8)),
                     ),
                     title: Text('Fernando Luis Martínez', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500)),
-                    subtitle: Text('micooreo@gmail.com', style: TextStyle(fontSize: 12)),
+                    subtitle: Text('ferb.stop@gmail.com', style: TextStyle(fontSize: 12)),
                   ),
                   
                   ListTile(
@@ -213,7 +213,6 @@ void _showDialog(context) {
                       child: Icon(Icons.add_circle_outline, color: Colors.black.withOpacity(.8)),
                     ),
                     title: Text('Agregar cuenta', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500)),
-                    subtitle: Text('ferb.stop@gmail.com', style: TextStyle(fontSize: 12)),
                   ),
 
                   ListTile(
