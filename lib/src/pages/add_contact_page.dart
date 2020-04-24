@@ -1,8 +1,12 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
+import 'package:animate_do/animate_do.dart';
+import 'package:provider/provider.dart';
+
 import 'package:contacts/src/pages/index.dart';
 
+import 'package:contacts/src/models/accounts_dialog_model.dart';
 import 'package:contacts/src/widgets/custom_menu_button.dart';
 
 class AddContactPage extends StatelessWidget {
@@ -38,18 +42,128 @@ class AddContactPage extends StatelessWidget {
         ],
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
+        child: ChangeNotifierProvider(
+          create: (_) => AccountsDialogModel(),
+          child: _Body()
+        )
+      ),
+    );
+  }
+}
 
+class _Body extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final accountsDialogModel = Provider.of<AccountsDialogModel>(context);
+
+    return Stack(
+      children: <Widget>[
+        Column(
+          children: <Widget>[
             _SaveIn(),
 
             _Form(),
-
-
-
           ],
         ),
-      ),
+
+        if (accountsDialogModel.show)
+          _Accounts(),
+      ],
+    );
+  }
+}
+
+class _Accounts extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final accountsDialogModel = Provider.of<AccountsDialogModel>(context);
+
+    return Stack(
+      children: <Widget>[
+
+        GestureDetector(
+          onTap: (){
+            final accountsDialogModel = Provider.of<AccountsDialogModel>(context, listen: false);
+
+            accountsDialogModel.controller.reverse();
+            Timer(Duration(milliseconds: 400), () {
+                accountsDialogModel.show = false;
+            });
+          },
+          child: Container(
+            width: double.infinity,
+            height: MediaQuery.of(context).size.height,
+            color: Colors.transparent,
+          ),
+        ),
+        
+        FadeInDown(
+          from: 40,
+          duration: Duration(milliseconds: 400),
+          controller: (animationController) => accountsDialogModel.controller = animationController,
+          child: Container(
+            margin: EdgeInsets.only(top: 60),
+            padding: EdgeInsets.only(bottom: 10),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  blurRadius: 10,
+                  color: Colors.black12,
+                  offset: Offset(0, 7),
+                )
+              ],
+              border: Border.all(
+                color: Colors.grey.withOpacity(.5)
+              )
+
+            ),
+            child: Column(
+              children: <Widget>[
+
+                Material(
+                  color: Colors.white,
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      child: Text('F', style: TextStyle(color: Colors.white, fontSize: 23)),
+                    ),
+                    title: Text('Fernando Luis Martínez', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
+                    subtitle: Text('ferb.stop@gmail.com', style: TextStyle(fontSize: 13)),
+                    onTap: (){},
+                  ),
+                ),
+
+                Material(
+                  color: Colors.white,
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      backgroundColor: Colors.pink,
+                      child: Text('F', style: TextStyle(color: Colors.white, fontSize: 23)),
+                    ),
+                    title: Text('Fernando Luis Martínez', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
+                    subtitle: Text('fernandoluis@recursoconfiable.com', style: TextStyle(fontSize: 13)),
+                    onTap: (){},
+                  ),
+                ),
+
+                Material(
+                  color: Colors.white,
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      backgroundColor: Colors.grey.withOpacity(.15),
+                      child: Icon(Icons.phone_android, color: Colors.black.withOpacity(.7)),
+                    ),
+                    title: Text('Dispositivo', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
+                    onTap: (){},
+                  ),
+                ),
+
+              ],
+            ),
+          ),
+        ),
+    
+      ],
     );
   }
 }
@@ -193,7 +307,26 @@ class __RowTextFieldState extends State<_RowTextField> {
   }
 }
 
-class _SaveIn extends StatelessWidget {
+class _SaveIn extends StatefulWidget {
+  @override
+  __SaveInState createState() => __SaveInState();
+}
+
+class __SaveInState extends State<_SaveIn> with SingleTickerProviderStateMixin{
+  AnimationController controller;
+
+  @override
+  void initState() {
+    controller = AnimationController(vsync: this, duration: Duration(milliseconds: 500) );
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -209,28 +342,35 @@ class _SaveIn extends StatelessWidget {
             child: Text('Guardar en', style: TextStyle(fontWeight: FontWeight.bold))
           ),
 
-          Container(
-            width: MediaQuery.of(context).size.width * .60,
-            padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(50)
-            ),
-            child: Row(
-              children: <Widget>[
+          GestureDetector(
+            onTap: () {
+              final accountsDialogModel = Provider.of<AccountsDialogModel>(context, listen: false);
+              
+              accountsDialogModel.show = true;
+            },
+            child: Container(
+              width: MediaQuery.of(context).size.width * .60,
+              padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(50)
+              ),
+              child: Row(
+                children: <Widget>[
 
-                CircleAvatar(
-                  child: Text('F'),
-                ),
-                SizedBox(width: 5),
+                  CircleAvatar(
+                    child: Text('F'),
+                  ),
+                  SizedBox(width: 5),
 
-                Expanded(
-                  child: Text('ferb.stop@gmail.com', style: TextStyle(fontWeight: FontWeight.w600), overflow: TextOverflow.ellipsis,)
-                ),
+                  Expanded(
+                    child: Text('ferb.stop@gmail.com', style: TextStyle(fontWeight: FontWeight.w600), overflow: TextOverflow.ellipsis,)
+                  ),
 
-                Icon(Icons.keyboard_arrow_down)
+                  Icon(Icons.keyboard_arrow_down)
 
-              ],
+                ],
+              ),
             ),
           )
 

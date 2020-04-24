@@ -27,6 +27,8 @@ dependencies:
   draggable_scrollbar_sliver: ^0.0.3
   provider: ^4.0.5
   flutter_svg: ^0.17.4
+  animate_do: ^1.7.2
+
 
 
 
