@@ -1,5 +1,6 @@
-import 'package:contacts/src/pages/unser_construction_page.dart';
 import 'package:flutter/material.dart';
+
+import 'package:contacts/src/utils/utils.dart';
 
 class CustomMenuButton extends StatelessWidget {
   final List<Choice> choices;
@@ -14,7 +15,7 @@ class CustomMenuButton extends StatelessWidget {
     return PopupMenuButton<Choice>(
       icon: Icon(Icons.more_vert, color: Colors.black87,),
       onSelected: (value) {
-        Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => UnderConstructionPage()));
+        showSnackBar(context);
       },
       itemBuilder: (BuildContext context) {
         return choices.map((Choice choice) {

@@ -5,6 +5,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:provider/provider.dart';
 
 import 'package:contacts/src/pages/index.dart';
+import 'package:contacts/src/utils/utils.dart';
 
 import 'package:contacts/src/models/accounts_dialog_model.dart';
 import 'package:contacts/src/widgets/custom_menu_button.dart';
@@ -78,17 +79,20 @@ class _Accounts extends StatelessWidget {
   Widget build(BuildContext context) {
     final accountsDialogModel = Provider.of<AccountsDialogModel>(context);
 
+    void hideAcoountsCard() {
+
+      accountsDialogModel.controller.reverse();
+      Timer(Duration(milliseconds: 400), () {
+          accountsDialogModel.show = false;
+      });
+    }
+
     return Stack(
       children: <Widget>[
 
         GestureDetector(
           onTap: (){
-            final accountsDialogModel = Provider.of<AccountsDialogModel>(context, listen: false);
-
-            accountsDialogModel.controller.reverse();
-            Timer(Duration(milliseconds: 400), () {
-                accountsDialogModel.show = false;
-            });
+            hideAcoountsCard();
           },
           child: Container(
             width: double.infinity,
@@ -129,7 +133,14 @@ class _Accounts extends StatelessWidget {
                     ),
                     title: Text('Fernando Luis Martínez', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
                     subtitle: Text('ferb.stop@gmail.com', style: TextStyle(fontSize: 13)),
-                    onTap: (){},
+                    onTap: (){ 
+                      hideAcoountsCard();
+                      accountsDialogModel.emailSelected = 'ferb.stop@gmail.com';
+                      accountsDialogModel.colorSelected = Colors.blue[700];
+                      accountsDialogModel.childSelected = CircleAvatar(
+                        child: Text('F', style: TextStyle(color: Colors.white)),
+                      );
+                    },
                   ),
                 ),
 
@@ -142,7 +153,15 @@ class _Accounts extends StatelessWidget {
                     ),
                     title: Text('Fernando Luis Martínez', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
                     subtitle: Text('fernandoluis@recursoconfiable.com', style: TextStyle(fontSize: 13)),
-                    onTap: (){},
+                    onTap: (){ 
+                      hideAcoountsCard();
+                      accountsDialogModel.emailSelected = 'fernandoluis@recursoconfiable.com';
+                      accountsDialogModel.colorSelected = Colors.pink;
+                      accountsDialogModel.childSelected = CircleAvatar(
+                        backgroundColor: Colors.pink,
+                        child: Text('F', style: TextStyle(color: Colors.white)),
+                      );
+                    },
                   ),
                 ),
 
@@ -154,7 +173,15 @@ class _Accounts extends StatelessWidget {
                       child: Icon(Icons.phone_android, color: Colors.black.withOpacity(.7)),
                     ),
                     title: Text('Dispositivo', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
-                    onTap: (){},
+                    onTap: (){ 
+                      hideAcoountsCard();
+                      accountsDialogModel.emailSelected = 'Dispositivo';
+                      accountsDialogModel.colorSelected = Colors.grey.withOpacity(.15);
+                      accountsDialogModel.childSelected = CircleAvatar(
+                        backgroundColor: Colors.grey.withOpacity(.15),
+                        child: Icon(Icons.phone_android, color: Colors.black.withOpacity(.7)),
+                      );
+                    },
                   ),
                 ),
 
@@ -329,6 +356,8 @@ class __SaveInState extends State<_SaveIn> with SingleTickerProviderStateMixin{
 
   @override
   Widget build(BuildContext context) {
+    final accountsDialogModel = Provider.of<AccountsDialogModel>(context);
+
     return Container(
       padding: EdgeInsets.all(10),
       width: double.infinity,
@@ -343,9 +372,7 @@ class __SaveInState extends State<_SaveIn> with SingleTickerProviderStateMixin{
           ),
 
           GestureDetector(
-            onTap: () {
-              final accountsDialogModel = Provider.of<AccountsDialogModel>(context, listen: false);
-              
+            onTap: () {              
               accountsDialogModel.show = true;
             },
             child: Container(
@@ -358,13 +385,20 @@ class __SaveInState extends State<_SaveIn> with SingleTickerProviderStateMixin{
               child: Row(
                 children: <Widget>[
 
-                  CircleAvatar(
-                    child: Text('F'),
-                  ),
+                  if (accountsDialogModel.childSelected != null)
+                    accountsDialogModel.childSelected
+                  else
+                    CircleAvatar(
+                      child: Text('F'),
+                    ),
+                  
                   SizedBox(width: 5),
 
                   Expanded(
-                    child: Text('ferb.stop@gmail.com', style: TextStyle(fontWeight: FontWeight.w600), overflow: TextOverflow.ellipsis,)
+                    child: Text(accountsDialogModel.emailSelected, 
+                      style: TextStyle(fontWeight: FontWeight.w600), 
+                      overflow: TextOverflow.ellipsis
+                    )
                   ),
 
                   Icon(Icons.keyboard_arrow_down)

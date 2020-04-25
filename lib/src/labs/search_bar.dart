@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:contacts/src/utils/utils.dart';
 import 'package:contacts/src/widgets/custom_divider.dart';
 import 'package:contacts/src/search/search_delegate.dart';
 
@@ -70,7 +71,9 @@ class _MenuItem extends StatelessWidget {
         ),
         _MenuButton(
           item: MenuButton(
-            onPressed: (){  print('Options');  }, 
+            onPressed: (){  
+              showSnackBar(context);
+            }, 
             child: Icon(Icons.more_vert)
           ),
         ),

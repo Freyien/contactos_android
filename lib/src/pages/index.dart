@@ -5,6 +5,8 @@ import 'package:contacts/src/widgets/index/contact_list.dart';
 import 'package:contacts/src/labs/search_bar.dart';
 import 'package:contacts/src/pages/add_contact_page.dart';
 
+import 'package:contacts/src/utils/utils.dart';
+
 class IndexPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -116,7 +118,7 @@ class _DrawerPages extends StatelessWidget {
               leading: Icon(Icons.error_outline, color: Colors.black.withOpacity(.70)),
               title: Text('Sugerencias'),
               onTap: (){
-                _functionNotImplemented(context);
+                showSnackBarAndCloseDrawer(context);
               },
             ),
           )
@@ -143,7 +145,7 @@ class _DrawerLabels extends StatelessWidget {
           leading: Icon(Icons.label_outline, color: Colors.black.withOpacity(.70)),
           title: Text('Family'),
           onTap: (){
-            _functionNotImplemented(context);
+            showSnackBarAndCloseDrawer(context);
           },
         ),
 
@@ -151,7 +153,7 @@ class _DrawerLabels extends StatelessWidget {
           leading: Icon(Icons.add, color: Colors.black.withOpacity(.70)),
           title: Text('Crear etiquetas'),
           onTap: () {
-            _functionNotImplemented(context);
+            showSnackBarAndCloseDrawer(context);
           },
         ),
 
@@ -170,7 +172,7 @@ class _DrawerConfig extends StatelessWidget {
           leading: Icon(Icons.settings, color: Colors.black.withOpacity(.70)),
           title: Text('Configuración'),
           onTap: (){
-            _functionNotImplemented(context);
+            showSnackBarAndCloseDrawer(context);
           },
         ),
 
@@ -178,7 +180,7 @@ class _DrawerConfig extends StatelessWidget {
           leading: Icon(Icons.help_outline, color: Colors.black.withOpacity(.70)),
           title: Text('Ayuda y comentarios'),
           onTap: () {
-            _functionNotImplemented(context);
+            showSnackBarAndCloseDrawer(context);
           },
         ),
 
@@ -236,14 +238,4 @@ class _FloatingActionAdd extends StatelessWidget {
       backgroundColor: Colors.blue,
     );
   }
-}
-
-void _functionNotImplemented(context) {
-  //Snackbar
-  Scaffold.of(context).showSnackBar(SnackBar(
-    content: Text("Función no implementada"),
-  ));
-
-  //Close Drawer
-  Navigator.pop(context);
 }

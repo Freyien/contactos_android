@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:contacts/src/utils/utils.dart';
 
 import 'package:contacts/src/pages/add_contact_page.dart';
 import 'package:contacts/src/widgets/custom_divider.dart';
@@ -54,7 +55,6 @@ class _ContactInfoState extends State<ContactInfo> {
       body: SingleChildScrollView(
         child: _Body()
       ),
-      //floatingActionButton: FABExpanded(isExtended, width)
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: Colors.blue[700],
         onPressed: (){
@@ -85,7 +85,8 @@ class _Body extends StatelessWidget {
           leading: Icon(Icons.phone_android),
           title: Text('+52 1 55 1234 5678'),
           subtitle: Text('Celular'),
-          trailing: Icon(Icons.message),
+          trailing: IconButton(icon: Icon(Icons.message), onPressed: () { showSnackBar(context); }),
+          onTap: () { showSnackBar(context); },
         ),
 
         _CustomListDivider(),
@@ -94,6 +95,7 @@ class _Body extends StatelessWidget {
           leading: Icon(Icons.phone),
           title: Text('+52 1 55 1234 5678'),
           subtitle: Text('Local'),
+          onTap: () { showSnackBar(context); },
         ),
 
         _CustomListDivider(),
@@ -104,24 +106,17 @@ class _Body extends StatelessWidget {
 }
 
 class _Actions extends StatelessWidget {
-  const _Actions({
-    Key key,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
 
-          _Action('Llamar', Icons.phone),
-          _Action('Mensajde texto', Icons.message),
-          _Action('Configurar', Icons.settings)
+        _Action('Llamar', Icons.phone),
+        _Action('Mensajde texto', Icons.message),
+        _Action('Configurar', Icons.settings)
 
-        ],
-      ),
+      ],
     );
   }
 }
@@ -187,14 +182,20 @@ class _Action extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
+    return GestureDetector(
+      onTap: () { showSnackBar(context); },
+      child: Container(
+        //padding: EdgeInsets.all(20),
+        child: Column(
+          children: <Widget>[
 
-        Icon(this.icon, color: Colors.blue[700]),
-        SizedBox(height: 7),
-        Text(this.text, style: TextStyle(color: Colors.blue[700], fontWeight: FontWeight.w600),)
+            Icon(this.icon, color: Colors.blue[700]),
+            SizedBox(height: 7),
+            Text(this.text, style: TextStyle(color: Colors.blue[700], fontWeight: FontWeight.w600),)
 
-      ],
+          ],
+        ),
+      ),
     );
   }
 }
