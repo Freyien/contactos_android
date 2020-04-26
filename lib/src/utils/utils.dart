@@ -21,7 +21,8 @@ void closeDrawer(context) {
 void statusBarTransparent() {
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark
     )
   );
 }

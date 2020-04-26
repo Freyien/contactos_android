@@ -13,9 +13,6 @@ class MyApp extends StatelessWidget {
     
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        brightness: Brightness.light
-      ),
       title: 'Diseños App',
       home: IndexPage(),
     );
