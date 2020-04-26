@@ -1,11 +1,12 @@
 import 'dart:async';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:animate_do/animate_do.dart';
 import 'package:provider/provider.dart';
 
 import 'package:contacts/src/pages/index.dart';
-import 'package:contacts/src/utils/utils.dart';
+
 
 import 'package:contacts/src/models/accounts_dialog_model.dart';
 import 'package:contacts/src/widgets/custom_menu_button.dart';
@@ -207,10 +208,21 @@ class _Form extends StatelessWidget {
           Container(
             alignment: Alignment.center,
             margin: EdgeInsets.only(bottom: 40),
-            child: CircleAvatar( 
-              child: Icon(Icons.photo_camera, size: 30),
-              radius: 30,
-            ),
+            child: RawMaterialButton(
+              onPressed: () => _showDialog(context),
+              elevation: 0,
+              focusElevation: 0,
+              highlightElevation: 0,
+              hoverElevation: 0,
+              fillColor: Colors.blue[700],
+              child: Icon(
+                Icons.photo_camera,
+                size: 30,
+                color: Colors.white,
+              ),
+              padding: EdgeInsets.all(15.0),
+              shape: CircleBorder(),
+            )
           ),
 
           _RowTextField('Nombre', prefixIcon: Icons.person_outline),
@@ -413,3 +425,47 @@ class __SaveInState extends State<_SaveIn> with SingleTickerProviderStateMixin{
     );
   }
 }
+
+  void _showDialog(context) {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+
+        return SimpleDialog(
+          contentPadding: EdgeInsets.all(0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(8))
+          ),
+          title: Text('Cambiar foto', style: TextStyle(fontSize: 16)),
+          children: <Widget>[
+            SimpleDialogOption(
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 8),
+                child: Text('Tomar foto', style: TextStyle(color: Colors.black.withOpacity(.7)),)
+              ),
+              onPressed: () { Navigator.pop(context); },
+            ),
+            SimpleDialogOption(
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 8),
+                child: Text('Cambiar foto', style: TextStyle(color: Colors.black.withOpacity(.7)),)
+              ),
+              onPressed: () { Navigator.pop(context); },
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                FlatButton(
+                  onPressed: () => Navigator.pop(context), 
+                  child: Text('Cancelar', style: TextStyle(color: Color(0xff2465C1))),
+                  splashColor: Colors.transparent,
+                  highlightColor: Color(0xff2465C1).withOpacity(.1),
+                ),
+              ],
+            )
+          ],
+        );
+      }
+    );
+  }

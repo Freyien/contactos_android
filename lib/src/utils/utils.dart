@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void showSnackBarAndCloseDrawer(context) {
   closeDrawer(context);
@@ -15,4 +16,12 @@ void showSnackBar(context) {
 
 void closeDrawer(context) {
   Navigator.pop(context);
+}
+
+void statusBarTransparent() {
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent
+    )
+  );
 }

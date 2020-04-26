@@ -30,6 +30,10 @@ class _ContactInfoState extends State<ContactInfo> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.black), 
+          onPressed: () => Navigator.of(context).pop()
+        ),
         backgroundColor: Colors.white,
         title: Text('data'),
         actions: <Widget>[

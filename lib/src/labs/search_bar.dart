@@ -170,22 +170,27 @@ void _showDialog(context) {
                     ),
                     title: Text('Fernando Luis Martínez', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
                     subtitle: Text('ferb.stop@gmail.com', style: TextStyle(fontSize: 12)),
-                    trailing: Image.asset('assets/imgs/google-logo.png', height: 30,)
+                    trailing: Image.asset('assets/imgs/google-logo.png', height: 30),
                   ),
 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
-                      Container(
-                        margin: EdgeInsets.only(right: 30),
-                        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 7),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          border: Border.all(
-                            color: Colors.black12
+                      GestureDetector(
+                        onTap: () {
+                          closeDrawer(context);
+                        },
+                        child: Container(
+                          margin: EdgeInsets.only(right: 30),
+                          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50),
+                            border: Border.all(
+                              color: Colors.black12
+                            ),
                           ),
+                          child: Text('Administrar tu cuenta de Google', style: TextStyle(fontWeight: FontWeight.w500),),
                         ),
-                        child: Text('Administrar tu cuenta de Google', style: TextStyle(fontWeight: FontWeight.w500),),
                       ),
                     ],
                   ),            
@@ -208,6 +213,7 @@ void _showDialog(context) {
                     ),
                     title: Text('Fernando Luis Martínez', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500)),
                     subtitle: Text('ferb.stop@gmail.com', style: TextStyle(fontSize: 12)),
+                    onTap: () => closeDrawer(context),
                   ),
                   
                   ListTile(
@@ -216,6 +222,7 @@ void _showDialog(context) {
                       child: Icon(Icons.add_circle_outline, color: Colors.black.withOpacity(.8)),
                     ),
                     title: Text('Agregar cuenta', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500)),
+                    onTap: () => closeDrawer(context),
                   ),
 
                   ListTile(
@@ -224,6 +231,7 @@ void _showDialog(context) {
                       child: Icon(Icons.lock_outline, color: Colors.black.withOpacity(.8)),
                     ),
                     title: Text('Administrar cuentas en este dispositivo', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500)),
+                    onTap: () => closeDrawer(context),
                   ),
 
 
@@ -239,7 +247,10 @@ void _showDialog(context) {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
 
-                  Text('Políticas de Privacidad', style: TextStyle(fontSize: 12)),
+                  InkWell(
+                    onTap: () => closeDrawer(context),
+                    child: Text('Políticas de Privacidad', style: TextStyle(fontSize: 12))
+                  ),
                   
                   Container(
                     height: 5,
@@ -250,7 +261,10 @@ void _showDialog(context) {
                     ),
                   ),
 
-                  Text('Condiciones del servicio', style: TextStyle(fontSize: 12))
+                  InkWell(
+                    onTap: () => closeDrawer(context),
+                    child: Text('Condiciones del servicio', style: TextStyle(fontSize: 12))
+                  )
 
                 ],
               ),
