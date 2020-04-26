@@ -1,6 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
+import 'package:contacts/src/theme/theme.dart';
+
+import 'package:provider/provider.dart';
+
 import 'package:draggable_scrollbar_sliver/draggable_scrollbar_sliver.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
 
@@ -81,13 +85,15 @@ class _SideHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkTheme = Provider.of<CustomTheme>(context).isDarkTheme;
+    
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
       child: Text(
         letter,
         style: TextStyle(
           fontSize: 17,
-          color: Colors.blue,
+          color: (isDarkTheme) ? Color(0xff95B5E9) : Color(0xff3681E1),
           fontWeight: FontWeight.bold
         ),
       )
@@ -103,13 +109,15 @@ class _Contact extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final customTheme = Provider.of<CustomTheme>(context);
     final firstname = this.contact["firstname"];
     final secondname = this.contact["secondname"];
     final lastname = this.contact["lastname"];
     final color = this.contact["color"];
     
     return Material(
-      color: Colors.white,
+      
+      color: customTheme.currentTheme.scaffoldBackgroundColor,
       child: InkWell(
         onTap: () {
           Timer(Duration(milliseconds: 100), (){
@@ -119,7 +127,7 @@ class _Contact extends StatelessWidget {
         child: ListTile(
           leading: CircleAvatar(
             backgroundColor: color,
-            foregroundColor: Colors.white,
+            foregroundColor: (customTheme.isDarkTheme) ? Colors.black : Colors.white,
             child: Text(
               this.letter,
               style: TextStyle(

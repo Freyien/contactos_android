@@ -18,11 +18,19 @@ void closeDrawer(context) {
   Navigator.pop(context);
 }
 
-void statusBarTransparent() {
-  SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.dark
-    )
-  );
+void statusBarTransparent(isDarkTheme) {
+  if (isDarkTheme)
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.light
+      )
+    );
+  else
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark
+      )
+    );
 }

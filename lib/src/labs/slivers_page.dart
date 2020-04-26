@@ -1,5 +1,4 @@
 import 'package:contacts/src/models/contact_model.dart';
-import 'package:contacts/src/utils/colors_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
 
@@ -90,25 +89,20 @@ class _Contact extends StatelessWidget {
     final firstname = this.contact["firstname"];
     final secondname = this.contact["secondname"];
     final lastname = this.contact["lastname"];
+    final color = this.contact["color"];
     
-    return Row(
-      children: <Widget>[
-        Expanded(
-          child: ListTile(
-            leading: CircleAvatar(
-              backgroundColor: randomColor(),
-              foregroundColor: Colors.white,
-              child: Text(
-                this.letter,
-                style: TextStyle(
-                  fontSize: 27
-                ),
-              ),
-            ),
-            title: Text( '$firstname $secondname $lastname'),
+    return ListTile(
+      leading: CircleAvatar(
+        backgroundColor: color,
+        foregroundColor: Colors.black,
+        child: Text(
+          this.letter,
+          style: TextStyle(
+            fontSize: 27
           ),
         ),
-      ],
+      ),
+      title: Text( '$firstname $secondname $lastname'),
     );
   }
 }

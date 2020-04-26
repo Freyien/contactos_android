@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
+import 'package:provider/provider.dart';
+
+import 'package:contacts/src/theme/theme.dart';
 import 'package:contacts/src/utils/utils.dart';
+
 import 'package:contacts/src/widgets/custom_divider.dart';
 import 'package:contacts/src/search/search_delegate.dart';
 
@@ -14,12 +18,14 @@ class SearchBar extends StatelessWidget {
 class _MenuContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final customTheme = Provider.of<CustomTheme>(context);
+    
     return Container(
       height: 50,
       margin: EdgeInsets.symmetric(horizontal: 15),
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: (customTheme.isDarkTheme) ? customTheme.currentTheme.backgroundColor : Colors.white,
         borderRadius: BorderRadius.circular(5),
         boxShadow: <BoxShadow> [
           BoxShadow(
@@ -37,6 +43,8 @@ class _MenuContainer extends StatelessWidget {
 class _MenuItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final customTheme = Provider.of<CustomTheme>(context);
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
@@ -55,7 +63,7 @@ class _MenuItem extends StatelessWidget {
               'Buscar contactos...',
               style: TextStyle(
                 fontSize: 16,
-                color: Colors.grey
+                color: (customTheme.isDarkTheme) ? Color(0xff9DA1A4) : Colors.black.withOpacity(.7)
               ),
             ),
             onPressed: (){  
@@ -84,9 +92,10 @@ class _MenuItem extends StatelessWidget {
               _showDialog(context);
 
               
-            }
-            , 
-            child: CircleAvatar( 
+            }, 
+            child: CircleAvatar(
+              backgroundColor: Color(0xff0088D8),
+              foregroundColor: Colors.white,
               child: Text('F'), 
               maxRadius: 15,
             )
@@ -112,7 +121,7 @@ class _MenuButton extends StatelessWidget {
         onTap: item.onPressed,
         child: Container(
           padding: EdgeInsets.all(7),
-          child: item.child,
+          child: item.child
         ),
       ),
     );
