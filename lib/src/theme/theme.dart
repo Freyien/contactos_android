@@ -15,12 +15,29 @@ class CustomTheme with ChangeNotifier{
       secondary: Color(0xff2D69C1), //FAB
     ),
     canvasColor: Color(0xff414246), //Drawer
+    appBarTheme: AppBarTheme(
+      actionsIconTheme: IconThemeData(
+        color: Color(0xff9DA1A4)
+      ),
+      iconTheme: IconThemeData(
+        color: Color(0xff9DA1A4)
+      ),
+    ),
+    primaryColor: Colors.red,
   );
 
   ThemeData _lightTheme = ThemeData.light().copyWith(
     colorScheme: ColorScheme.dark(
       secondary: Color(0xff1A73E9), //FAB
     ),
+    appBarTheme: AppBarTheme(
+      actionsIconTheme: IconThemeData(
+        color: Colors.black87
+      ),
+      iconTheme: IconThemeData(
+        color: Colors.black87
+      ),
+    )
   );
 
   //constructor

@@ -10,7 +10,7 @@ import 'package:contacts/src/pages/index.dart';
 void main() => runApp(
   MultiProvider(
     providers: [
-      ChangeNotifierProvider<CustomTheme>(create: (_) => new CustomTheme(darkTheme: false))
+      ChangeNotifierProvider<CustomTheme>(create: (_) => new CustomTheme(darkTheme: true))
     ],
     child: MyApp(),
   )

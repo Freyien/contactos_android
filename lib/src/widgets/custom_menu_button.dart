@@ -10,10 +10,9 @@ class CustomMenuButton extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-
+  Widget build(BuildContext context) {    
     return PopupMenuButton<Choice>(
-      icon: Icon(Icons.more_vert, color: Colors.black87,),
+      icon: Icon( Icons.more_vert ),
       onSelected: (value) {
         showSnackBar(context);
       },

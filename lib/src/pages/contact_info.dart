@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+
+import 'package:provider/provider.dart';
+
 import 'package:contacts/src/utils/utils.dart';
+import 'package:contacts/src/theme/theme.dart';
 
 import 'package:contacts/src/pages/add_contact_page.dart';
 import 'package:contacts/src/widgets/custom_divider.dart';
@@ -26,16 +30,20 @@ class _ContactInfoState extends State<ContactInfo> {
 
   @override
   Widget build(BuildContext context) {
+    final customTheme = Provider.of<CustomTheme>(context);
+    final backgroundColor = (customTheme.isDarkTheme) ? customTheme.currentTheme.scaffoldBackgroundColor : Colors.white;
+    
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: backgroundColor,
       appBar: AppBar(
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black), 
+          icon: Icon(
+            Icons.arrow_back,
+          ), 
           onPressed: () => Navigator.of(context).pop()
         ),
-        backgroundColor: Colors.white,
-        title: Text('data'),
+        backgroundColor: backgroundColor,
         actions: <Widget>[
 
           IconButton(
@@ -43,7 +51,7 @@ class _ContactInfoState extends State<ContactInfo> {
             icon: Icon((starIsActived)
                       ? Icons.star
                       : Icons.star_border,
-              color: Colors.black87
+              //color: Colors.black87
             ), 
             onPressed: (){
               setState(() {
@@ -60,7 +68,7 @@ class _ContactInfoState extends State<ContactInfo> {
         child: _Body()
       ),
       floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: Colors.blue[700],
+        foregroundColor: Colors.white,
         onPressed: (){
           Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => AddContactPage() ));
         }, 
@@ -74,6 +82,8 @@ class _ContactInfoState extends State<ContactInfo> {
 class _Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final customTheme = Provider.of<CustomTheme>(context);
+
     return Column(
       children: <Widget>[
 
@@ -89,7 +99,11 @@ class _Body extends StatelessWidget {
           leading: Icon(Icons.phone_android),
           title: Text('+52 1 55 1234 5678'),
           subtitle: Text('Celular'),
-          trailing: IconButton(icon: Icon(Icons.message), onPressed: () { showSnackBar(context); }),
+          trailing: IconButton(
+            icon: Icon(Icons.message), 
+            color: (customTheme.isDarkTheme) ? Color(0xff95B5E9) : Color(0xff3373C3),
+            onPressed: () { showSnackBar(context); }
+          ),
           onTap: () { showSnackBar(context); },
         ),
 
@@ -117,7 +131,7 @@ class _Actions extends StatelessWidget {
       children: <Widget>[
 
         _Action('Llamar', Icons.phone),
-        _Action('Mensajde texto', Icons.message),
+        _Action('Mensaje de texto', Icons.message),
         _Action('Configurar', Icons.settings)
 
       ],
@@ -126,12 +140,10 @@ class _Actions extends StatelessWidget {
 }
 
 class _Header extends StatelessWidget {
-  const _Header({
-    Key key,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
+    final customTheme = Provider.of<CustomTheme>(context);
+
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       child: Column(
@@ -143,6 +155,8 @@ class _Header extends StatelessWidget {
             child: CircleAvatar(
               child: Text('A', style: TextStyle(fontSize: 50),),
               radius: 45,
+              backgroundColor: customTheme.currentTheme.accentColor,
+              foregroundColor: (customTheme.isDarkTheme) ? Colors.black : Colors.white,
             ),
           ),
 
@@ -186,16 +200,18 @@ class _Action extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final customTheme = Provider.of<CustomTheme>(context);
+    final color = (customTheme.isDarkTheme) ? Color(0xff95B5E9) : Color(0xff3373C3);
+
     return GestureDetector(
       onTap: () { showSnackBar(context); },
       child: Container(
-        //padding: EdgeInsets.all(20),
         child: Column(
           children: <Widget>[
 
-            Icon(this.icon, color: Colors.blue[700]),
+            Icon(this.icon, color: color),
             SizedBox(height: 7),
-            Text(this.text, style: TextStyle(color: Colors.blue[700], fontWeight: FontWeight.w600),)
+            Text(this.text, style: TextStyle(color: color, fontWeight: FontWeight.w500, fontSize: 16))
 
           ],
         ),
