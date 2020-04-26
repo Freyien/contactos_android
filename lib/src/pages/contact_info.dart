@@ -31,7 +31,7 @@ class _ContactInfoState extends State<ContactInfo> {
   @override
   Widget build(BuildContext context) {
     final customTheme = Provider.of<CustomTheme>(context);
-    final backgroundColor = (customTheme.isDarkTheme) ? customTheme.currentTheme.scaffoldBackgroundColor : Colors.white;
+    final backgroundColor = customTheme.currentTheme.scaffoldBackgroundColor;
     
     return Scaffold(
       backgroundColor: backgroundColor,
@@ -51,7 +51,6 @@ class _ContactInfoState extends State<ContactInfo> {
             icon: Icon((starIsActived)
                       ? Icons.star
                       : Icons.star_border,
-              //color: Colors.black87
             ), 
             onPressed: (){
               setState(() {
@@ -101,7 +100,7 @@ class _Body extends StatelessWidget {
           subtitle: Text('Celular'),
           trailing: IconButton(
             icon: Icon(Icons.message), 
-            color: (customTheme.isDarkTheme) ? Color(0xff95B5E9) : Color(0xff3373C3),
+            color: (customTheme.isDarkTheme) ? customTheme.currentTheme.accentColor : Color(0xff3373C3),
             onPressed: () { showSnackBar(context); }
           ),
           onTap: () { showSnackBar(context); },
@@ -201,7 +200,7 @@ class _Action extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final customTheme = Provider.of<CustomTheme>(context);
-    final color = (customTheme.isDarkTheme) ? Color(0xff95B5E9) : Color(0xff3373C3);
+    final color = (customTheme.isDarkTheme) ? customTheme.currentTheme.accentColor : Color(0xff3373C3);
 
     return GestureDetector(
       onTap: () { showSnackBar(context); },

@@ -22,13 +22,20 @@ class CustomTheme with ChangeNotifier{
       iconTheme: IconThemeData(
         color: Color(0xff9DA1A4)
       ),
+      textTheme: TextTheme(
+        title: TextStyle(color: Color(0xff9DA1A4), fontSize: 21)
+      )
     ),
-    primaryColor: Colors.red,
+    accentColor: Color(0xff95B5E9)
+
   );
 
   ThemeData _lightTheme = ThemeData.light().copyWith(
+    scaffoldBackgroundColor: Colors.white,
+    backgroundColor: Colors.white,
     colorScheme: ColorScheme.dark(
       secondary: Color(0xff1A73E9), //FAB
+      onSurface: Colors.black,
     ),
     appBarTheme: AppBarTheme(
       actionsIconTheme: IconThemeData(
@@ -37,6 +44,9 @@ class CustomTheme with ChangeNotifier{
       iconTheme: IconThemeData(
         color: Colors.black87
       ),
+      textTheme: TextTheme(
+        title: TextStyle(color: Colors.black87, fontSize: 21)
+      )
     )
   );
 

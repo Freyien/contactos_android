@@ -25,7 +25,7 @@ class _MenuContainer extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 15),
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
-        color: (customTheme.isDarkTheme) ? customTheme.currentTheme.backgroundColor : Colors.white,
+        color: customTheme.currentTheme.backgroundColor,
         borderRadius: BorderRadius.circular(5),
         boxShadow: <BoxShadow> [
           BoxShadow(
@@ -158,12 +158,21 @@ class MenuButton {
   });
 }
 
-void _showDialog(context) {
-  Dialog simpleDialog = Dialog(
+void _showDialog(context) {  
+  showDialog( context: context, builder: (BuildContext context) {
+    final customTheme = Provider.of<CustomTheme>(context);
+    final avatarColor = (customTheme.isDarkTheme) ? Colors.white : Colors.grey.withOpacity(.15);
+    final borderColor = (customTheme.isDarkTheme) ? Colors.grey.withOpacity(.3) : Colors.black12;
+    
+    return Dialog(
+      backgroundColor: customTheme.currentTheme.backgroundColor,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8.0),
+        borderRadius: BorderRadius.circular(8),
       ),
       child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8)
+        ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
@@ -176,6 +185,8 @@ void _showDialog(context) {
                   ListTile(
                     leading: CircleAvatar(
                       child: Text('F'),
+                      backgroundColor: Color(0xff0088D8),
+                      foregroundColor: Colors.white,
                     ),
                     title: Text('Fernando Luis Martínez', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
                     subtitle: Text('ferb.stop@gmail.com', style: TextStyle(fontSize: 12)),
@@ -195,7 +206,7 @@ void _showDialog(context) {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(50),
                             border: Border.all(
-                              color: Colors.black12
+                              color: borderColor
                             ),
                           ),
                           child: Text('Administrar tu cuenta de Google', style: TextStyle(fontWeight: FontWeight.w500),),
@@ -217,7 +228,7 @@ void _showDialog(context) {
 
                   ListTile(
                     leading: CircleAvatar(
-                      backgroundColor: Colors.grey.withOpacity(.15),
+                      backgroundColor: avatarColor,
                       child: Icon(Icons.people_outline, color: Colors.black.withOpacity(.8)),
                     ),
                     title: Text('Fernando Luis Martínez', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500)),
@@ -227,7 +238,7 @@ void _showDialog(context) {
                   
                   ListTile(
                     leading: CircleAvatar(
-                      backgroundColor: Colors.grey.withOpacity(.15),
+                      backgroundColor: avatarColor,
                       child: Icon(Icons.add_circle_outline, color: Colors.black.withOpacity(.8)),
                     ),
                     title: Text('Agregar cuenta', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500)),
@@ -236,7 +247,7 @@ void _showDialog(context) {
 
                   ListTile(
                     leading: CircleAvatar(
-                      backgroundColor: Colors.grey.withOpacity(.15),
+                      backgroundColor: avatarColor,
                       child: Icon(Icons.lock_outline, color: Colors.black.withOpacity(.8)),
                     ),
                     title: Text('Administrar cuentas en este dispositivo', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500)),
@@ -283,6 +294,5 @@ void _showDialog(context) {
         ),
       ),
     );
-
-  showDialog( context: context, builder: (BuildContext context) => simpleDialog );
+  });
 }

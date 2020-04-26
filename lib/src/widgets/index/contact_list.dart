@@ -85,7 +85,7 @@ class _SideHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDarkTheme = Provider.of<CustomTheme>(context).isDarkTheme;
+    final customTheme = Provider.of<CustomTheme>(context);
     
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
@@ -93,7 +93,7 @@ class _SideHeader extends StatelessWidget {
         letter,
         style: TextStyle(
           fontSize: 17,
-          color: (isDarkTheme) ? Color(0xff95B5E9) : Color(0xff3681E1),
+          color: (customTheme.isDarkTheme) ? customTheme.currentTheme.accentColor : Color(0xff3681E1),
           fontWeight: FontWeight.bold
         ),
       )

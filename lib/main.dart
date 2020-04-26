@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:contacts/src/utils/utils.dart';
 import 'package:contacts/src/theme/theme.dart';
 
-import 'package:contacts/src/pages/index.dart';
+import 'package:contacts/src/pages/index.dart'; 
 
 void main() => runApp(
   MultiProvider(

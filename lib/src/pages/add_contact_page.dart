@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:provider/provider.dart';
 
+import 'package:contacts/src/theme/theme.dart';
+
 import 'package:contacts/src/pages/index.dart';
-
-
 import 'package:contacts/src/models/accounts_dialog_model.dart';
 import 'package:contacts/src/widgets/custom_menu_button.dart';
 
@@ -18,21 +18,25 @@ class AddContactPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final customTheme = Provider.of<CustomTheme>(context);
+    final backgroundColor = customTheme.currentTheme.scaffoldBackgroundColor;
+    final saveColor = (customTheme.isDarkTheme) ? customTheme.currentTheme.accentColor : Color(0xff3373C3);
+    
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: backgroundColor,
       appBar: AppBar(
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.close, color: Colors.black), 
+          icon: Icon(Icons.close), 
           onPressed: () {
             Navigator.of(context).pop();
           }
         ),
-        backgroundColor: Colors.white,
-        title: Text('Crear contacto', style: TextStyle(color: Colors.black)),
+        backgroundColor: backgroundColor,
+        title: Text('Crear contacto'),
         actions: <Widget>[
           FlatButton(
-            child: Text('Guardar', style: TextStyle(color: Color(0xff2465C1), fontSize: 15),),
+            child: Text('Guardar', style: TextStyle(color: saveColor, fontSize: 15),),
             onPressed: (){
               FocusScope.of(context).requestFocus(FocusNode());
               Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => IndexPage())); 
@@ -79,6 +83,7 @@ class _Accounts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final accountsDialogModel = Provider.of<AccountsDialogModel>(context);
+    final customTheme = Provider.of<CustomTheme>(context);
 
     void hideAcoountsCard() {
 
@@ -110,7 +115,7 @@ class _Accounts extends StatelessWidget {
             margin: EdgeInsets.only(top: 60),
             padding: EdgeInsets.only(bottom: 10),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: customTheme.currentTheme.scaffoldBackgroundColor,
               boxShadow: [
                 BoxShadow(
                   blurRadius: 10,
@@ -127,18 +132,21 @@ class _Accounts extends StatelessWidget {
               children: <Widget>[
 
                 Material(
-                  color: Colors.white,
+                  color: customTheme.currentTheme.scaffoldBackgroundColor,
                   child: ListTile(
                     leading: CircleAvatar(
-                      child: Text('F', style: TextStyle(color: Colors.white, fontSize: 23)),
+                      child: Text('F', style: TextStyle(fontSize: 23)),
+                      backgroundColor: Color(0xff0088D8),
+                      foregroundColor: Colors.white,
                     ),
                     title: Text('Fernando Luis Martínez', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
                     subtitle: Text('ferb.stop@gmail.com', style: TextStyle(fontSize: 13)),
                     onTap: (){ 
                       hideAcoountsCard();
                       accountsDialogModel.emailSelected = 'ferb.stop@gmail.com';
-                      accountsDialogModel.colorSelected = Colors.blue[700];
+                      accountsDialogModel.colorSelected = Color(0xff0088D8);
                       accountsDialogModel.childSelected = CircleAvatar(
+                        backgroundColor: Color(0xff0088D8),
                         child: Text('F', style: TextStyle(color: Colors.white)),
                       );
                     },
@@ -146,7 +154,7 @@ class _Accounts extends StatelessWidget {
                 ),
 
                 Material(
-                  color: Colors.white,
+                  color: customTheme.currentTheme.scaffoldBackgroundColor,
                   child: ListTile(
                     leading: CircleAvatar(
                       backgroundColor: Colors.pink,
@@ -167,19 +175,19 @@ class _Accounts extends StatelessWidget {
                 ),
 
                 Material(
-                  color: Colors.white,
+                  color: customTheme.currentTheme.scaffoldBackgroundColor,
                   child: ListTile(
                     leading: CircleAvatar(
-                      backgroundColor: Colors.grey.withOpacity(.15),
+                      backgroundColor: (customTheme.isDarkTheme) ? Colors.white : Colors.grey.withOpacity(.15),
                       child: Icon(Icons.phone_android, color: Colors.black.withOpacity(.7)),
                     ),
                     title: Text('Dispositivo', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
                     onTap: (){ 
                       hideAcoountsCard();
                       accountsDialogModel.emailSelected = 'Dispositivo';
-                      accountsDialogModel.colorSelected = Colors.grey.withOpacity(.15);
+                      accountsDialogModel.colorSelected = (customTheme.isDarkTheme) ? Colors.white : Colors.grey.withOpacity(.15);
                       accountsDialogModel.childSelected = CircleAvatar(
-                        backgroundColor: Colors.grey.withOpacity(.15),
+                        backgroundColor: (customTheme.isDarkTheme) ? Colors.white : Colors.grey.withOpacity(.15),
                         child: Icon(Icons.phone_android, color: Colors.black.withOpacity(.7)),
                       );
                     },
@@ -230,10 +238,10 @@ class _Form extends StatelessWidget {
           _RowTextField('Empresa', prefixIcon: Icons.location_city),
           _RowTextField('Teléfono', prefixIcon: Icons.phone, textType: TextInputType.phone),
           
-          _RowTextField('Etiqueta', inputType: 'DROPDOWNBUTTON', textList: ['Celular', 'Laboral', 'Particular' ,'Principal', 'Localizador', 'Otro', 'Sin etiqueta']),
+          _RowTextField('Etiqueta', inputType: 'DROPDOWNBUTTON', textList: ['Celular', 'Laboral', 'Particular' ,'Principal', 'Localizador', 'Otro', 'Sin etiqueta'], selectedValue: 'Celular'),
 
           _RowTextField('Correo electrónico', prefixIcon: Icons.mail_outline, textType: TextInputType.emailAddress),
-          _RowTextField('Etiqueta', inputType: 'DROPDOWNBUTTON', textList: ['Sin etiqueta', 'Particular', 'Laboral' ,'Otro']),
+          _RowTextField('Etiqueta', inputType: 'DROPDOWNBUTTON', textList: ['Sin etiqueta', 'Particular', 'Laboral' ,'Otro'], selectedValue: 'Particular'),
 
 
         ],
@@ -248,6 +256,7 @@ class _RowTextField extends StatefulWidget {
   final TextInputType textType;
   final String inputType;
   final List<String> textList;
+  final String selectedValue;
 
   _RowTextField(
     this.text, 
@@ -255,7 +264,8 @@ class _RowTextField extends StatefulWidget {
       this.prefixIcon,
       this.textType = TextInputType.text,
       this.inputType = 'TEXT',
-      this.textList
+      this.textList,
+      this.selectedValue = ''
     }
   );
 
@@ -276,13 +286,15 @@ class __RowTextFieldState extends State<_RowTextField> {
 
   @override
   Widget build(BuildContext context) {
+    final customTheme = Provider.of<CustomTheme>(context);
+
     if (this.widget.prefixIcon != null)
       icon = Icon(this.widget.prefixIcon, size: 25);
     else
-      icon = Icon(Icons.android, size: 25, color: Colors.white);
+      icon = Icon(Icons.android, size: 25, color: customTheme.currentTheme.scaffoldBackgroundColor);
 
     if (this.widget.inputType == 'DROPDOWNBUTTON')
-      suffixIcon = Icon(Icons.arrow_drop_down, size: 25, color: Colors.black87);
+      suffixIcon = Icon(Icons.arrow_drop_down, size: 25);
 
     return Container(
       margin: EdgeInsets.only(bottom: 15),
@@ -303,6 +315,10 @@ class __RowTextFieldState extends State<_RowTextField> {
                   });
               });
             },
+            onSubmitted: (submit) {
+              FocusScope.of(context).nextFocus();
+            },
+            textInputAction: TextInputAction.next,
             keyboardType: this.widget.textType,
             decoration: InputDecoration(
               isDense: true,
@@ -324,11 +340,12 @@ class __RowTextFieldState extends State<_RowTextField> {
                 padding: EdgeInsets.only(bottom: 5),
                 color: Colors.red,
                 child: DropdownButton(
+                  value: this.widget.selectedValue,
                   isExpanded: true,
-                  items: this.widget.textList.map((String hey) {
+                  items: this.widget.textList.map((String itemValue) {
                     return new DropdownMenuItem<String>(
-                      value: hey,
-                      child: new Text(hey),
+                      value: itemValue,
+                      child: new Text(itemValue),
                     );
                   }).toList(),
                   icon: Icon(Icons.keyboard_arrow_down),
@@ -369,12 +386,13 @@ class __SaveInState extends State<_SaveIn> with SingleTickerProviderStateMixin{
   @override
   Widget build(BuildContext context) {
     final accountsDialogModel = Provider.of<AccountsDialogModel>(context);
+    final customTheme = Provider.of<CustomTheme>(context);
 
     return Container(
       padding: EdgeInsets.all(10),
       width: double.infinity,
       height: 60,
-      color: Colors.grey.withOpacity(.4),
+      color: (customTheme.isDarkTheme) ? Color(0xff5F6267) : Color(0xffDBDCE0),
       child: Row(
         children: <Widget>[
 
@@ -391,7 +409,7 @@ class __SaveInState extends State<_SaveIn> with SingleTickerProviderStateMixin{
               width: MediaQuery.of(context).size.width * .60,
               padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: customTheme.currentTheme.scaffoldBackgroundColor,
                 borderRadius: BorderRadius.circular(50)
               ),
               child: Row(
@@ -402,6 +420,8 @@ class __SaveInState extends State<_SaveIn> with SingleTickerProviderStateMixin{
                   else
                     CircleAvatar(
                       child: Text('F'),
+                      backgroundColor: Color(0xff0088D8),
+                      foregroundColor: Colors.white,
                     ),
                   
                   SizedBox(width: 5),
@@ -427,10 +447,10 @@ class __SaveInState extends State<_SaveIn> with SingleTickerProviderStateMixin{
 }
 
   void _showDialog(context) {
-    // flutter defined function
     showDialog(
       context: context,
       builder: (BuildContext context) {
+        final customTheme = Provider.of<CustomTheme>(context);
 
         return SimpleDialog(
           contentPadding: EdgeInsets.all(0),
@@ -442,14 +462,14 @@ class __SaveInState extends State<_SaveIn> with SingleTickerProviderStateMixin{
             SimpleDialogOption(
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 8),
-                child: Text('Tomar foto', style: TextStyle(color: Colors.black.withOpacity(.7)),)
+                child: Text('Tomar foto')
               ),
               onPressed: () { Navigator.pop(context); },
             ),
             SimpleDialogOption(
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 8),
-                child: Text('Cambiar foto', style: TextStyle(color: Colors.black.withOpacity(.7)),)
+                child: Text('Cambiar foto')
               ),
               onPressed: () { Navigator.pop(context); },
             ),
@@ -458,9 +478,9 @@ class __SaveInState extends State<_SaveIn> with SingleTickerProviderStateMixin{
               children: <Widget>[
                 FlatButton(
                   onPressed: () => Navigator.pop(context), 
-                  child: Text('Cancelar', style: TextStyle(color: Color(0xff2465C1))),
+                  child: Text('Cancelar', style: TextStyle(color: customTheme.currentTheme.accentColor)),
                   splashColor: Colors.transparent,
-                  highlightColor: Color(0xff2465C1).withOpacity(.1),
+                  highlightColor: customTheme.currentTheme.accentColor.withOpacity(.1),
                 ),
               ],
             )
