@@ -278,6 +278,23 @@ class __RowTextFieldState extends State<_RowTextField> {
   Widget suffixIcon;
   Widget icon;
 
+   @override
+  void initState() {
+
+    controller.addListener(() {
+      setState(() {  
+        if (controller.text == '')
+          suffixIcon = null;
+        else {
+          suffixIcon = IconButton(icon: Icon(Icons.clear), onPressed: (){
+            WidgetsBinding.instance.addPostFrameCallback( (_) => controller.clear());
+          });
+        }
+      });
+    });
+    super.initState();
+  }
+
   @override
   void dispose() {
     controller.dispose();
@@ -303,18 +320,6 @@ class __RowTextFieldState extends State<_RowTextField> {
 
           TextField(
             controller: controller,
-            onChanged: (value) {
-              setState(() {
-                if (value == '')
-                  suffixIcon = null;
-                else
-                  suffixIcon = IconButton(icon: Icon(Icons.clear), onPressed: (){   
-                    Timer(Duration(milliseconds: 50), () {
-                      controller.clear(); 
-                    });
-                  });
-              });
-            },
             onSubmitted: (submit) {
               FocusScope.of(context).nextFocus();
             },
