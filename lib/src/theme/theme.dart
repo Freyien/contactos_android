@@ -1,7 +1,9 @@
+import 'package:contacts/src/user_prefs/user_preferences.dart';
 import 'package:contacts/src/utils/colors_utils.dart';
 import 'package:flutter/material.dart';
 
 class CustomTheme with ChangeNotifier{
+  final _prefs = new UserPreferences();
   bool _isDarkTheme   = false;
   ThemeData _currentTheme;
   
@@ -23,8 +25,8 @@ class CustomTheme with ChangeNotifier{
         color: Color(0xff9DA1A4)
       ),
       textTheme: TextTheme(
-        title: TextStyle(color: Color(0xff9DA1A4), fontSize: 21)
-      )
+        headline6: TextStyle(color: Color(0xff9DA1A4), fontSize: 21),
+      ),
     ),
     accentColor: Color(0xff95B5E9)
 
@@ -45,7 +47,8 @@ class CustomTheme with ChangeNotifier{
         color: Colors.black87
       ),
       textTheme: TextTheme(
-        title: TextStyle(color: Colors.black87, fontSize: 21)
+        //title: TextStyle(color: Colors.black87, fontSize: 21)
+        headline6: TextStyle(color: Colors.black87, fontSize: 21)
       )
     )
   );
@@ -71,10 +74,12 @@ class CustomTheme with ChangeNotifier{
       this._isDarkTheme = true;
       this._currentTheme = this._darkTheme;
       darkColors = true; //utils
+      _prefs.isDarkTheme = true;
     } else {
       this._isDarkTheme = false;
       this._currentTheme = this._lightTheme;
       darkColors = false; //utils
+      _prefs.isDarkTheme = false;
     }
   }
     

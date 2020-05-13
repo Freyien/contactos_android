@@ -7,6 +7,11 @@ class DataSearch extends SearchDelegate {
   final ContactModelList contactList = ContactModelList();
 
   @override
+  ThemeData appBarTheme(BuildContext context) {
+    return Theme.of(context);
+  }
+
+  @override
   String get searchFieldLabel => 'Buscar contactos';
 
   @override

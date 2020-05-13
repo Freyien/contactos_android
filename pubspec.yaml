@@ -28,13 +28,20 @@ dependencies:
   provider: ^4.0.5
   flutter_svg: ^0.17.4
   animate_do: ^1.7.2
-
-
+  shared_preferences: ^0.5.7
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  
+  flutter_launcher_icons: ^0.7.5
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icon/icon.png"
+  adaptive_icon_background: "assets/icon/icon.png"
 
 
 # For information on the generic Dart part of this file, see the

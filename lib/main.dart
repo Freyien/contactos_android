@@ -4,20 +4,26 @@ import 'package:provider/provider.dart';
 
 import 'package:contacts/src/utils/utils.dart';
 import 'package:contacts/src/theme/theme.dart';
-
+import 'package:contacts/src/user_prefs/user_preferences.dart';
 import 'package:contacts/src/pages/index.dart'; 
 
-void main() => runApp(
-  MultiProvider(
-    providers: [
-      ChangeNotifierProvider<CustomTheme>(create: (_) => new CustomTheme(darkTheme: true))
-    ],
-    child: MyApp(),
-  )
-);
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  final _prefs = new UserPreferences();
+  await _prefs.initPrefs();
+
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider<CustomTheme>(create: (_) => new CustomTheme(darkTheme: _prefs.isDarkTheme))
+      ],
+      child: MyApp(),
+    )
+  );
+} 
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     final customTheme = Provider.of<CustomTheme>(context);
